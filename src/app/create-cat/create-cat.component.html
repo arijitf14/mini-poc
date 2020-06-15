@@ -1,0 +1,25 @@
+<form #categoryForm = "ngForm" (ngSubmit)="categoryForm.valid && onSubmit(categoryForm)">
+    <h2>Create Category</h2>
+    <div>
+        <input type="text" #name="ngModel" [(ngModel)]="userService.category.name" name="name" placeholder="Category Name"
+    required [ngClass]= "{'invalid-textbox' :categoryForm.submitted && !name.valid}">
+    </div>
+    <div *ngIf="categoryForm.submitted && !name.valid ">
+        <label class="validation-message">This field is required</label>
+    </div>
+    <div>
+        <input type="text" #description="ngModel" [(ngModel)]="userService.category.description" name="description" placeholder="Category Description"
+    required [ngClass]= "{'invalid-textbox' :categoryForm.submitted && !description.valid}">
+    </div>
+    <div *ngIf="categoryForm.submitted && !description.valid ">
+        <label class="validation-message">This field is required</label>
+    </div>
+    <div>
+        <img [src]="altimg" alt="altimg">
+    </div>
+    <div>
+        <input type="file" #image name="file"  (change)="selectedImage($event.target.files)">
+    </div>
+    <span></span>
+    <button mat-raised-button type="submit">Upload</button>
+</form>

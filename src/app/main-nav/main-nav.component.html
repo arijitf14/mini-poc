@@ -1,0 +1,83 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav  #drawer class="sidenav" fixedInViewport
+  [mode]="(isHandset$ | async) ? 'over' : 'side'" >
+    <mat-toolbar class="tool">
+      <div class="avatar"></div>
+    </mat-toolbar>
+    <div class="title">
+      <p *ngIf="userDetails; else noUser">Hi {{userDetails.user.first_name}}!</p>
+      <ng-template #noUser>
+        <p>Admin</p>
+      </ng-template>
+    </div>
+    <mat-nav-list class="list">
+      <a mat-list-item class="items" routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item class="items" routerLink="/login">
+        <mat-icon>https</mat-icon>
+        Login</a>
+      <mat-divider></mat-divider>
+      <a *ngIf="userDetails" mat-list-item class="items" routerLink="/categories">
+        <mat-icon>dns</mat-icon>
+        Categories</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item class="items" routerLink="/register">
+        <mat-icon> contacts</mat-icon>
+        Register</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item class="items" routerLink="/dashboard">
+          <mat-icon> power_settings_new</mat-icon>
+          Logout</a>
+          </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="panel" color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>poc</span>
+      <span class="spacer"></span>
+      <a mat-raised-button  routerLink="/login">Login</a>
+    <a mat-raised-button  routerLink="/register">Register</a>
+    <a mat-icon-button class="icon" routerLink="/wishlist">
+      <mat-icon >favorite</mat-icon>
+      </a>
+    <a mat-icon-button class="icon" routerLink="/home">
+      <mat-icon>home</mat-icon>
+      </a>
+    <a mat-icon-button class="icon" routerLink="/cart">
+      <mat-icon>add_shopping_cart</mat-icon>
+      </a>
+    <a mat-icon-button class="icon" [matMenuTriggerFor]="appMenu">
+      <mat-icon >drag_indicator</mat-icon></a>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span> 
+        </button>
+        <button mat-menu-item>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check Voicemail</span> 
+        </button>
+        <button mat-menu-item>
+            <mat-icon>notifications</mat-icon>
+            <span>Disable Alert</span> 
+        </button>
+        <button mat-menu-item routerLink = "/dashboard">
+            <mat-icon>power_settings_new</mat-icon>
+            <span >Logout</span>
+          </button>
+    </mat-menu>
+    
+    </mat-toolbar>
+    <router-outlet>
+    </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

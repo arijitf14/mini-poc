@@ -1,0 +1,27 @@
+<button mat-raised-button (click)="onCreate()">
+  <mat-icon>add</mat-icon>
+  Create Category
+</button>
+
+<div class="row">
+    <div class="column" *ngFor= " let category of categories">
+      <div class="card">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{category.name}}</mat-card-title>
+            <mat-card-subtitle>{{category.description}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="http://localhost:3000/{{category.img}}" >
+          <mat-card-content>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>SEE</button>
+            <button mat-button>EDIT</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+ 

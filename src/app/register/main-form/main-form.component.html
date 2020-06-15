@@ -1,0 +1,35 @@
+<form #signup="ngForm" (ngSubmit)="signup.valid && onSubmit(signup)">   
+    <input type="text" #first_name="ngModel" [(ngModel)]="userService.selectedUser.first_name" name="first_name" placeholder="First Name"
+    required [ngClass]= "{'invalid-textbox' :signup.submitted && !first_name.valid}">
+    <div *ngIf="signup.submitted && !first_name.valid ">
+        <label class="validation-message">This field is required</label>
+    </div>
+    <input type="text" #last_name="ngModel" [(ngModel)]="userService.selectedUser.last_name" name="last_name" placeholder="Last Name"
+    required [ngClass]= "{'invalid-textbox' :signup.submitted && !last_name.valid}">
+    <div *ngIf="signup.submitted && !last_name.valid ">
+        <label class="validation-message">This field is required</label>
+    </div>
+    <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"
+    required [pattern]="reg" [ngClass]= "{'invalid-textbox' :signup.submitted && !email.valid}">
+    <div *ngIf="signup.submitted && email.errors ">
+        <label *ngIf="email.errors.required" class="validation-message">This field is required</label>
+        <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address</label>
+    </div>
+    <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="Password"
+    minlength="4" required [ngClass]= "{'invalid-textbox' :signup.submitted && !password.valid}">
+    <div *ngIf="signup.submitted && password.errors ">
+        <label *ngIf="password.errors.required" class="validation-message">This field is required</label>
+        <label *ngIf="password.errors.minlength" class="validation-message">Password must be at least 4 characters</label>
+    </div>
+    <input type="submit" value="Sign Up">
+</form>
+
+<!-- Success -->
+<div class="success" *ngIf="showsuccessmessage">
+    Saved Successfully
+</div>
+
+<!-- Error -->
+<div class="alert" *ngIf="serverError">
+    {{serverError}}
+</div>
